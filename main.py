@@ -1,73 +1,64 @@
 import math
-def task1():
-    """
-    Функція для перестановки місцями цифр у двозначному числі
-    """
-    try:
-        number = int(input("Введіть двозначне число: "))
-        if 10 <= number <= 99:
-            digit1 = number // 10
-            digit2 = number % 10
-            reversed_number = digit2 * 10 + digit1
-            print("Результат перестановки цифр:", reversed_number)
-        else:
-            print("Введене число не є двозначним.")
-    except ValueError:
-        print("Помилка: Введіть дійсне ціле число.")
+def if24():
+    # Введення трьох чисел
+    x = float(input("Введіть перше число: "))
+    if x>0:
+        f_x=2*math.sin(x)
+    else:
+        f_x=6-x
+    print(f"f(x) при x {x} = {f_x}")
 
 def task2():
-    """
-    Функція для розрахунку прикладу.
-    """
-    try:
-        x = float(input("Введіть x: "))
-        num = math.exp(x+1)*math.sqrt(math.fabs(2*x-math.cos(x+(33*(math.pi/180)))-25))
-        denum =math.cbrt(math.sin(x*x))*math.log(math.fabs(x**2),5)
+    it=0
+    a=int(input("Введіть a: "))
+    b = int(input("Введіть b: "))
+    r=int(input("Введіть r: "))
+    n =int(input("Введіть кількість точок: "))
+    for i in range(n):
+        print(f"Введіть координати точки {i + 1}:")
+        x = float(input("x: "))  # Введення координати x
+        y = float(input("y: "))  # Введення координати y
+        if (x-(b/2))**2+(y-r)**2<r*r and x>(b/2):
+            it=it+1
+        elif (x-(b/2))**2+(y-r)**2>r*r and y<a and x>0 and y>0:
+            it = it + 1
 
-        if denum == 0:
-            print("Ділення на нуль неможливе.")
-        else:
-            y = num / denum
-            print(f"Значення y при x={x}: {y}")
-    except ValueError:
-        print("Помилка: Введіть коректне числове значення для x.")
-    except ZeroDivisionError:
-        print("Помилка: Ділення на нуль неможливе.")
+    print(f"Точок потрапляє у фігуру:{it}")
 
+def task16():
+    E = 1e-5  # Мала величина для збіжності
+    G = 1e5  # Велика величина для розбіжності
+    current_sum = 0
+    n = 1  # Починаємо з n = 1
+    u = 1  # Ініціалізуємо `u` значенням 1 перед використанням
 
-def task3():
-    """
-    Функція для перевірки істинності висловлювання «Існує
-трикутник зі сторонами a, b, c»..
-    """
-    try:
-        a = int(input("Введіть число a: "))
-        b = int(input("Введіть число b: "))
-        c = int(input("Введіть число c: "))
+    while abs(u) >= E and abs(u) <= G:
+        u = (n**3 * math.exp(2 * n + 1)) / math.factorial(n)
+        current_sum += u
+        print(u)
+        n += 1
 
-        is_positive = a + b > c and a + c > b and b + c > a
-
-        print(is_positive)
-    except ValueError:
-        print("Помилка:Введіть ціле число для a, b та c.")
-
+    if abs(u) < E:
+        print("Сума сходиться до заданої точності.")
+    elif abs(u) > G:
+        print("Ряд розходиться.")
 
 if __name__ == "__main__":
     while True:
         print("\nОберіть опцію:")
-        print("1. Вивести число з переставленими числами")
-        print("2. Обрахувати приклад")
-        print("3. Перевірити істинність висловлювання")
+        print("1. Визначити корінь рівняння")
+        print("2. Попадання в фігуру")
+        print("3. Дослідження ряду на збіжність ")
         print("0. Вийти")
 
         choice = input("Ваш вибір: ")
 
         if choice == "1":
-            task1()
+            if24()
         elif choice == "2":
             task2()
         elif choice == "3":
-            task3()
+            task16()
         elif choice == "0":
             break
         else:
